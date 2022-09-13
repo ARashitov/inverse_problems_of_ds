@@ -1,0 +1,66 @@
+[app.metadata]
+title = "inverse problems of data science"
+description = "Repository with learning materials of inverse problems of data science"
+
+[tool.commitizen]
+version = "0.3.0"
+
+[tool.kedro]
+package_name = "pipelines"
+project_name = "pipelines"
+project_version = "0.18.0"
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 120
+known_third_party = "kedro"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = """
+--verbosity=10 \
+--cov-report term-missing \
+--cov src/gps_activity -ra \
+--log-level=INFO \
+--tb=long \
+"""
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
+
+[tool.poetry]
+name = "research_vehicle_activity_analysis"
+version = "0.1.0"
+description = ""
+authors = ["Adil <32989359+AtmosOne@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+pandas = "^1.4.3"
+numpy = "^1.23.1"
+scikit-learn = "^1.1.2"
+jupyter = "^1.0.0"
+ipykernel = "^6.15.1"
+kedro = "^0.18.2"
+plotly = "^5.9.0"
+multiprocess = "^0.70.13"
+geopandas = "^0.11.1"
+pyspark = "^3.3.0"
+jupyter-contrib-core = "^0.4.0"
+jupyter-nbextensions-configurator = "^0.5.0"
+pandera = "^0.11.0"
+jupyter-contrib-nbextensions = "^0.5.1"
+keplergl = "^0.3.2"
+s3fs = "2022.1.0"
+autopep8 = "^1.7.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

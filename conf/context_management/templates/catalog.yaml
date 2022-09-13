@@ -1,0 +1,109 @@
+01_raw_alba_scl_weee_gps@csv:
+  type: PartitionedDataSet
+  dataset:
+    type: pandas.CSVDataSet
+    load_args:
+      engine: python
+      delimiter: "\t"
+      encoding: "utf-16"
+  path: s3://project-alba-scl-weee-activity-extraction/data/01_raw/GPS/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .csv
+
+01_raw_alba_scl_weee_gps@xlsx:
+  type: PartitionedDataSet
+  dataset:
+    type: kedro.extras.datasets.pandas.ExcelDataSet
+    load_args:
+      dtype: str
+      engine: xlrd
+      skiprows: 4
+  path: s3://project-alba-scl-weee-activity-extraction/data/01_raw/GPS_xls/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .xls
+
+01_raw_alba_scl_weee_gps_local@xlsx:
+  type: PartitionedDataSet
+  dataset:
+    type: kedro.extras.datasets.pandas.ExcelDataSet
+    load_args:
+      dtype: str
+      engine: xlrd
+      skiprows: 4
+  path: data/01_raw/GPS/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .xls
+
+01_raw_alba_scl_weee_plan@xlsx:
+  type: PartitionedDataSet
+  dataset: kedro.extras.datasets.pandas.ExcelDataSet
+  path: s3://project-alba-scl-weee-activity-extraction/data/01_raw/collection_plans/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .xlsx
+
+01_raw_alba_scl_weee_plan@csv:
+  type: PartitionedDataSet
+  dataset:
+    type: pandas.CSVDataSet
+    load_args:
+      delimiter: ";"
+      on_bad_lines: skip
+      dtype: str
+  path: s3://project-alba-scl-weee-activity-extraction/data/01_raw/collection_plans_csv/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .csv
+
+01_raw_alba_scl_weee_plan_local@csv:
+  type: PartitionedDataSet
+  dataset:
+    type: pandas.CSVDataSet
+    load_args:
+      delimiter: ";"
+      on_bad_lines: skip
+      dtype: str
+  path: data/01_raw/plans/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .csv
+
+02_intermediate__geocode__cache_layer_2:
+  type: PartitionedDataSet
+  dataset: kedro.extras.datasets.pandas.ParquetDataSet
+  path: s3://data-hong-kong-mixed-addresses/dev_alba_scl_weee/geocoding/cache_layer_2/
+  credentials: {credentials}
+  filename_suffix: .parquet
+  layer: 02_intermediate
+
+
+03_primary_fuzzy_tables@parquet:
+  type: PartitionedDataSet
+  dataset:
+    type: kedro.extras.datasets.pandas.ParquetDataSet
+  path: s3://project-alba-scl-weee-activity-extraction/data/03_primary/fuzzy_tables/
+  credentials: {credentials}
+  layer: 03_primary
+  filename_suffix: .parquet
+
+
+03_primary_geocodes@parquet:
+  type: PartitionedDataSet
+  dataset:
+    type: kedro.extras.datasets.pandas.ParquetDataSet
+  path: s3://project-alba-scl-weee-activity-extraction/data/03_primary/geocoders/
+  credentials: {credentials}
+  layer: 03_primary
+  filename_suffix: .parquet
+
+05_model_input_dataset@csv:
+  type: PartitionedDataSet
+  dataset:
+    type: pandas.CSVDataSet
+  path: s3://project-alba-scl-weee-activity-extraction/data/05_model_input/train_datasets/
+  credentials: {credentials}
+  layer: 01_raw
+  filename_suffix: .csv

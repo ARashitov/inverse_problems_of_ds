@@ -1,0 +1,27 @@
+sample_configs:
+  config_1:
+    - config
+  config_2:
+    - config_1
+    - config_2
+
+geocoding:
+  v1:
+    input_addres_column: "Custom field (Address 1)"
+    replace_keyword: "[address]"
+    query_colname: query
+    api:
+      geodata_gov_hk:
+        n_process: 6
+        url_template: "https://geodata.gov.hk/gs/api/v1.0.0/locationSearch?q=[address]"
+        rename_columns:
+          addressZH: formatted_address
+        output_columns:
+          - search_address
+          - lat
+          - lng
+          - formatted_address
+          - api
+      google_map:
+        n_process: 1
+        url_template: "[address]"

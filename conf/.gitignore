@@ -1,0 +1,4 @@
+dev/*
+prod/*
+test/*
+ua_test/*
